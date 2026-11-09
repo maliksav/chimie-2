@@ -1,10 +1,10 @@
 import tkinter as tk
 personnes = {
-    "oli":{"masse creuset":32.2469,"masse creuset AgCl":32.8468,"masse inconnu": 0.3002,"inconnu": "A"
+    "Olivier":{"masse creuset":32.2469,"masse creuset AgCl":32.8468,"masse inconnu": 0.3002,"inconnu": "A"
     },
-    "malik":{"masse creuset":30.5851,"masse creuset AgCl":31.0764,"masse inconnu": 0.3008,"inconnu": "D"
+    "Malik":{"masse creuset":30.5851,"masse creuset AgCl":31.0764,"masse inconnu": 0.3008,"inconnu": "D"
     },
-    "lp":{"masse creuset":30.3884,"masse creuset AgCl":31.0931,"masse inconnu": 0.3005,"inconnu": "D"}}
+    "Louis-Phillipe":{"masse creuset":30.3884,"masse creuset AgCl":31.0931,"masse inconnu": 0.3005,"inconnu": "D"}}
 def boucle(frame,inde,y):
     l = 0
     for i in personnes:
@@ -16,18 +16,18 @@ def entre(frame:tk.Frame,text:str,x:int,y:int):
     ent.insert(tk.END, text)
     ent.grid(column=x, row=y)
 
-def trouver(p:dict):
+def trouver(personne:dict):
     # X + Y = masse mélange inconnu
     # Y(masse nacl) = masse mélange inconnu - X
-    mmkcl =  74.551
-    mmnacl = 58.44
-    mmagcl = 143.321
-    p["masse AgCl"] = float(f"{p["masse creuset AgCl"] - p["masse creuset"]:.5g}")
-    p["masse NaCl"] = abs(float(f"{((p["masse AgCl"]/mmagcl)-(p["masse inconnu"]/mmkcl))/((1/mmnacl)-(1/mmkcl)):.3g}"))
-    p["masse KCl"] = float(f"{p["masse AgCl"] - p["masse NaCl"]:.3g}")
-    p["% KCl"] = float(f"{p["masse KCl"]/p["masse AgCl"]*100:.3g}")
-    p["% NaCl"] = float(f"{p["masse NaCl"]/p["masse AgCl"]*100:.3g}")
-    return p
+    MMKCl =  74.551
+    MMNaCl = 58.44
+    MMAgCl = 143.321
+    personne["masse AgCl"] = float(f"{personne["masse creuset AgCl"] - personne["masse creuset"]:.5g}")
+    personne["masse NaCl"] = abs(float(f"{((personne["masse AgCl"] / MMAgCl) - (personne["masse inconnu"] / MMKCl)) / ((1 / MMNaCl) - (1 / MMKCl)):.3g}"))
+    personne["masse KCl"] = float(f"{personne["masse AgCl"] - personne["masse NaCl"]:.3g}")
+    personne["% KCl"] = float(f"{personne["masse KCl"] / personne["masse AgCl"] * 100:.3g}")
+    personne["% NaCl"] = float(f"{personne["masse NaCl"] / personne["masse AgCl"] * 100:.3g}")
+    return personne
 
 
 def main():
